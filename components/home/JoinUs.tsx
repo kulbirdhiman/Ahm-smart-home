@@ -1,40 +1,46 @@
-import React from 'react'
+"use client";
+
+import React from "react";
+import { motion } from "framer-motion";
 
 const JoinUs = () => {
-    return (
-        <div className="w-full py-10 mt-10">
-        <div
-            className={"bg-cover bg-center rounded-2xl w-full py-12 px-6 sm:px-12 text-white flex flex-col items-center justify-center text-center"}
-            style={{ backgroundImage: "url('/landbg.jpg')" }}
-        >
-            {/* Title + Subtitle in two rows */}
-            <div className="w-full max-w-xl flex flex-col sm:flex-row justify-between items-center text-center sm:text-left gap-2">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                Join Our Newsletter
-            </h2>
-            <p className="text-sm sm:text-base lg:text-lg">
-                Get exclusive offers & updates directly in your inbox.
-            </p>
-            </div>
+  return (
+    <section className="w-full py-20 px-6 flex items-center justify-center bg-gradient-to-b from-black via-neutral-900 to-black">
+      <motion.div
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
+        className="relative w-full  rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 shadow-2xl text-center py-14 px-6 sm:px-12"
+      >
+        {/* Title */}
+        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white">
+          Join Our Newsletter
+        </h2>
 
-            {/* Form */}
-            <div className="mt-6 flex flex-col items-center gap-4 w-full max-w-md">
-            <input
-                type="email"
-                placeholder="Enter your e-mail"
-                className="w-full px-4 py-2 rounded-xl text-white border-blue-500 border-1 focus:border-0
-                focus:outline-none focus:ring-2 focus:ring-gray-300"
-            />
-            <button
-                type="button"
-                className="bg-gray-400 hover:bg-gray-500 px-6 py-2 rounded-xl text-white font-semibold transition-colors"
-            >
-                Subscribe
-            </button>
-            </div>
-        </div>
-        </div>
-    )
-}
+        {/* Subtitle */}
+        <p className="mt-4 text-base md:text-lg text-gray-300 max-w-xl mx-auto">
+          Be the first to know about our latest products, exclusive offers, and
+          upcoming events. Inspiration straight to your inbox.
+        </p>
 
-export default JoinUs
+        {/* Form */}
+        <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 w-full max-w-xl mx-auto">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="flex-1 px-5 py-3 rounded-full text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          />
+          <button
+            type="button"
+            className="px-6 py-3 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition-colors w-full sm:w-auto"
+          >
+            Subscribe
+          </button>
+        </div>
+      </motion.div>
+    </section>
+  );
+};
+
+export default JoinUs;

@@ -3,68 +3,121 @@
 import { useState } from "react";
 import ProductTabs from "./ProductTab";
 import RelatedProducts from "./ProductH";
-import { FiHeart } from "react-icons/fi";
+import { Heart } from "lucide-react";
+import Image from "next/image";
 
 export default function Home() {
-    const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(1);
+  const [favorite, setFavorite] = useState(false);
+  const [selectedVariant, setSelectedVariant] = useState("standard");
 
-    const increase = () => setQuantity((prev) => prev + 1);
-    const decrease = () =>
-        setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+  const increase = () => setQuantity((prev) => prev + 1);
+  const decrease = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
-    return (
-        <div className="min-h-screen bg-black text-white px-4 md:px-10 py-10">
-        {/* Product Section */}
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
-            {/* Left Side - Image */}
-            <div className="flex justify-center relative ">
-                {/* Heart Icon - Always top right of container */}
-                        <button type="button" aria-label="error" className="absolute top-2 right-2 p-1 cursor-pointer z-10">
-                            <FiHeart className="text-white text-xl sm:text-lg md:text-2xl hover:text-red-500 transition-colors" />
-                        </button>
-            <img
-                src="/3rd.png"
-                alt="3D Face Recognition Door Lock"
-                className="max-w-xs md:max-w-md"
+  return (
+    <div className="min-h-screen bg-black text-white px-6 md:px-16 py-14 font-[Inter]">
+      {/* Product Section */}
+      <div className="grid lg:grid-cols-2 gap-16 items-start">
+        {/* Left Side - Image */}
+        <div className="flex justify-center relative group">
+          {/* Heart Icon */}
+          <button
+            type="button"
+            aria-label="wishlist"
+            onClick={() => setFavorite(!favorite)}
+            className="absolute top-4 right-4 p-2 rounded-full bg-black/40 hover:bg-black/60 transition z-10"
+          >
+            <Heart
+              className={`w-6 h-6 ${
+                favorite ? "text-red-500 fill-red-500" : "text-white"
+              }`}
             />
-            </div>
+          </button>
 
-            {/* Right Side - Product Info */}
-            <div>
-            <h1 className="text-2xl md:text-3xl font-semibold">
-                3D Face Recognition with Smart Control Door/Digital Fingerprint with Password & Lock Built-in Camera
-            </h1>
-            <p className="mt-3 text-red-400 text-xl">$144</p>
-            <p className="text-gray-400 mt-1">SKU: AHM-0006</p>
-            <p className="text-gray-400">Product ID: 26876</p>
+          {/* Main Product Image */}
+          <Image
+            src="/3rd.png"
+            alt="3D Face Recognition Door Lock"
+            width={450}
+            height={450}
+            className="transition-transform duration-500 group-hover:scale-105"
+          />
 
-            {/* Quantity + Buy Now */}
-            <div className="flex items-center gap-3 mt-5">
+          {/* Hover Overlay with Info */}
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-md opacity-0 group-hover:opacity-100 flex flex-col justify-center items-center gap-3 px-6 text-center transition-opacity duration-500">
+            <p className="text-lg font-medium">
+              Advanced 3D Face Recognition Lock
+            </p>
+            <p className="text-gray-400 text-sm max-w-sm">
+              Unlock with face, fingerprint, or passcode. Built-in security
+              camera for complete safety.
+            </p>
+          </div>
+        </div>
+
+        {/* Right Side - Product Info */}
+        <div className="space-y-6">
+          <h1 className="text-4xl md:text-5xl font-semibold leading-snug tracking-tight">
+            3D Face Recognition Smart Door Lock
+          </h1>
+          <p className="text-2xl text-gray-300 leading-relaxed">
+            Digital Fingerprint with Password & Lock Built-in Camera
+          </p>
+          <p className="text-red-400 text-3xl font-semibold">$144</p>
+          <p className="text-gray-400 text-sm">SKU: AHM-0006</p>
+          <p className="text-gray-400 text-sm">Product ID: 26876</p>
+
+          {/* Variant Options */}
+          <div className="pt-2">
+            <h3 className="text-sm text-gray-300 mb-2">Choose Model</h3>
+            <div className="flex gap-3">
+              {["standard", "pro", "ultra"].map((variant) => (
                 <button
-                onClick={decrease}
-                className="px-3 py-1 border rounded cursor-pointer text-lg hover:bg-gray-800"
+                  key={variant}
+                  onClick={() => setSelectedVariant(variant)}
+                  className={`px-5 py-2 rounded-full text-sm capitalize transition font-medium ${
+                    selectedVariant === variant
+                      ? "bg-white text-black"
+                      : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  }`}
                 >
-                -
+                  {variant}
                 </button>
-                <span className="text-lg w-8 text-center">{quantity}</span>
-                <button
-                onClick={increase}
-                className="px-3 py-1 border rounded text-lg hover:bg-gray-800 cursor-pointer"
-                >
-                +
-                </button>
-                <button className="ml-4 px-6 py-2 bg-blue-600 rounded-lg text-white flex items-center gap-2 cursor-pointer hover:bg-blue-700">
-                <span>🛒</span> Buy now
-                </button>
+              ))}
             </div>
+          </div>
 
-            {/* Tabs */}
+          {/* Quantity + Buy Now */}
+          <div className="flex items-center gap-3 pt-4">
+            <button
+              onClick={decrease}
+              className="px-3 py-1 border rounded-lg text-lg hover:bg-gray-800"
+            >
+              -
+            </button>
+            <span className="text-lg w-8 text-center">{quantity}</span>
+            <button
+              onClick={increase}
+              className="px-3 py-1 border rounded-lg text-lg hover:bg-gray-800"
+            >
+              +
+            </button>
+            <button className="ml-4 px-8 py-3 bg-blue-600 rounded-full text-white flex items-center gap-2 hover:bg-blue-700 transition font-medium">
+              🛒 Buy Now
+            </button>
+          </div>
+
+          {/* Tabs */}
+          <div className="pt-6">
             <ProductTabs />
-            </div>
+          </div>
         </div>
+      </div>
 
-        {/* Related Products */}
+      {/* Related Products */}
+      <div className="mt-20">
         <RelatedProducts />
-        </div>
-    );
+      </div>
+    </div>
+  );
 }

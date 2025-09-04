@@ -1,119 +1,71 @@
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import IconProfile from "./IconProfile";
-import { Menu, X } from "lucide-react";
+"use client";
+
+import React, { useState } from "react";
+import { Menu, X, ShoppingBag, Heart, User } from "lucide-react";
 
 const Navbar = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-    // ✅ Auto-close mobile menu when resizing back to desktop
-    useEffect(() => {
-        const handleResize = () => {
-        if (window.innerWidth >= 768) {
-            setMenuOpen(false);
-        }
-        };
+  const navItems = ["Store", "Mac", "iPad", "iPhone", "Watch", "Accessories", "Support"];
 
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
+  return (
+    <nav className="fixed top-0 left-0 w-full z-50 bg-black/90 backdrop-blur-md">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+        {/* Logo */}
+        <div className="text-white font-bold text-xl">AHM</div>
 
-    return (
-        <nav className="w-full px-6 py-6">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-            {/* Logo */}
-            <div className="flex-shrink-0">
-            <Image
-                src="/Ahm_logo.png"
-                height={120}
-                width={120}
-                alt="logo"
-                className="w-[90px] sm:w-[110px] md:w-[130px] lg:w-[150px] h-auto"
-            />
-            </div>
-
-            {/* Desktop Menu (md and up) */}
-            <div className="hidden md:flex space-x-6 font-medium text-base lg:text-lg">
+        {/* Desktop Menu */}
+        <div className="hidden md:flex space-x-8 text-gray-200 text-sm">
+          {navItems.map((item) => (
             <a
-                href="#"
-                className="hover:text-sky-400 hover:scale-110 transition-transform"
+              key={item}
+              href="#"
+              className="hover:text-white transition"
             >
-                Home
+              {item}
             </a>
-            <a
-                href="#"
-                className="hover:text-sky-400 hover:scale-110 transition-transform"
-            >
-                About
-            </a>
-            <a
-                href="#"
-                className="hover:text-sky-400 hover:scale-110 transition-transform"
-            >
-                Shop
-            </a>
-            <a
-                href="#"
-                className="hover:text-sky-400 hover:scale-110 transition-transform"
-            >
-                Contact
-            </a>
-            </div>
-
-            {/* Right side */}
-            <div className="flex items-center space-x-4 relative">
-            {/* Profile Icon (only desktop) */}
-            <div className="hidden md:block">
-                <IconProfile />
-            </div>
-
-            {/* Hamburger (mobile only) */}
-            <button
-                className="md:hidden text-gray-300 hover:text-sky-400 transition-transform transform hover:rotate-90"
-                onClick={() => setMenuOpen(!menuOpen)}
-            >
-                {menuOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
-
-            {/* Mobile Dropdown */}
-            {menuOpen && (
-                <div className="absolute right-0 top-12 w-[180px] sm:w-[200px] bg-[#2A2625] rounded-xl p-4 flex flex-col text-left text-sm sm:text-base font-medium shadow-lg animate-slideDown md:hidden">
-                <a
-                    href="#"
-                    className="hover:text-sky-400 hover:scale-105 transition-transform"
-                >
-                    🏠 Home
-                </a>
-                <a
-                    href="#"
-                    className="hover:text-sky-400 hover:scale-105 transition-transform"
-                >
-                    ℹ️ About
-                </a>
-                <a
-                    href="#"
-                    className="hover:text-sky-400 hover:scale-105 transition-transform"
-                >
-                    🛍️ Shop
-                </a>
-                <a
-                    href="#"
-                    className="hover:text-sky-400 hover:scale-105 transition-transform"
-                >
-                    📞 Contact
-                </a>
-                <a
-                    href="#"
-                    className="hover:text-sky-400 hover:scale-105 transition-transform"
-                >
-                    👤 Profile
-                </a>
-                </div>
-            )}
-            </div>
+          ))}
         </div>
-        </nav>
-    );
+
+        {/* Right Icons */}
+        <div className="flex items-center space-x-6 text-gray-200">
+          <button className="hover:text-white transition">
+            <Heart className="w-5 h-5" />
+          </button>
+          <button className="hover:text-white transition">
+            <ShoppingBag className="w-5 h-5" />
+          </button>
+          <button className="hover:text-white transition">
+            <User className="w-5 h-5" />
+          </button>
+
+          {/* Mobile Hamburger */}
+          <button
+            className="md:hidden hover:text-white transition"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-black text-gray-200 flex flex-col space-y-4 px-6 py-6 text-sm">
+          {navItems.map((item) => (
+            <a
+              key={item}
+              href="#"
+              className="hover:text-white transition"
+              onClick={() => setMenuOpen(false)}
+            >
+              {item}
+            </a>
+          ))}
+        </div>
+      )}
+    </nav>
+  );
 };
 
 export default Navbar;

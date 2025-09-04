@@ -1,11 +1,11 @@
-import React from 'react'
-import PDetail from '../../../components/home/ProductDetail'
+import React from "react";
+import PDetail from "../../../components/home/ProductDetail";
 const page = () => {
-    return (
-        <div>
-            <PDetail sku="hello" productId ={123}/>
-        </div>
-    )
-}
+  return (
+    <div>
+      <PDetail  />
+    </div>
+  );
+};
 
-export default page
+export default page;
