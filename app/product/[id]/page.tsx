@@ -1,10 +1,11 @@
 import React from "react";
-import PDetail from "../../../components/home/ProductDetail";
+import PList from "../../components/home/ProductList";
 const page = () => {
   return (
     <div>
-      <PDetail  />
+      <PList />
     </div>
+    
   );
 };
 
