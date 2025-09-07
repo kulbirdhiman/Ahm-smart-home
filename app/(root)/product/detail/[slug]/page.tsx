@@ -1,9 +1,9 @@
 import React from "react";
-import PDetail from "../../../components/home/ProductDetail";
+import PDetail from "@/components/home/ProductDetail";
 const page = () => {
   return (
     <div>
-      <PDetail  />
+      <PDetail />
     </div>
   );
 };

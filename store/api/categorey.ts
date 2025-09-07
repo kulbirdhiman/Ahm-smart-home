@@ -21,8 +21,35 @@ export const categoryApi = apiSlice.injectEndpoints({
         params: { page, limit, search },
       }),
     }),
+    getcategoryById: builder.query({
+      query: (id) => ({
+        url: `${CATEGORY_URL}/${id}`,
+        method: "GET",
+      }),
+    }),
+    updateCategorey: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `${CATEGORY_URL}/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+      invalidatesTags: ["Category"],
+    }),
+
+    deletecategoryById: builder.mutation({
+      query: (id) => ({
+        url: `${CATEGORY_URL}/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
 // Auto-generated hooks
-export const { useCreateCategoryMutation, useGetCategoriesQuery } = categoryApi;
+export const {
+  useCreateCategoryMutation,
+  useGetCategoriesQuery,
+  useUpdateCategoreyMutation,
+  useGetcategoryByIdQuery,
+  useDeletecategoryByIdMutation,
+} = categoryApi;

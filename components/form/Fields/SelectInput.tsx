@@ -25,7 +25,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
 
   return (
     <div >
-      <label className="block text-lg font-medium mb-1">{field.label}</label>
+      <label className="block text-black text-lg font-medium mb-1">{field.label}</label>
       <Select
         isMulti={field.isMultiple}
         options={field.options || []}

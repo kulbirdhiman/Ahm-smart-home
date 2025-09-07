@@ -2,7 +2,7 @@
 
 import { Provider } from "react-redux";
 import { Toaster } from "react-hot-toast";
-
+import Navbar from "../layout/Navbar";
 import store from "@/store/store";
 
 export default function StateProvider({
