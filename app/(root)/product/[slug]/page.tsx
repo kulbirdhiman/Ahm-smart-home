@@ -1,5 +1,5 @@
 import React from "react";
-import PList from "../../components/home/ProductList";
+import PList from "@/components/home/ProductList";
 const page = () => {
   return (
     <div>

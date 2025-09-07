@@ -3,24 +3,18 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import DynamicForm, { FormField } from "@/components/form/DynamicForm";
-import {
-  useCreateCategoryMutation,
-  useUpdateCategoreyMutation,
-} from "@/store/api/categorey";
-
+import { useCreateCategoryMutation } from "@/store/api/categorey";
 interface Props {
   isOpen: boolean;
   onClose: () => void;
-  categoryId?: number; // If provided, we are updating
   name?: string;
   description?: string;
-  onSave?: (data: { name: string; description: string }) => void;
+  onSave?: (data: { fullName: string; description: string }) => void;
 }
 
-export default function ModalFullNameDescription({
+export default function useUpdateCategoreyModel({
   isOpen,
   onClose,
-  categoryId,
   name = "",
   description = "",
   onSave,
@@ -30,20 +24,17 @@ export default function ModalFullNameDescription({
     description,
   });
   const [errors, setErrors] = React.useState<Record<string, string>>({});
-
   const [createCategory] = useCreateCategoryMutation();
-  const [updateCategorey] = useUpdateCategoreyMutation();
-
   React.useEffect(() => {
     setValues({ name, description });
-  }, [name, description, isOpen]);
+  }, [, description, isOpen]);
 
   const formFields: FormField[] = [
     {
       name: "name",
       label: "Name",
       type: "text",
-      placeholder: "Enter category name",
+      placeholder: "Enter full name",
       fieldClass:
         "mt-2 w-full rounded-lg bg-gray-800 border border-gray-700 px-3 py-2 text-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-600",
       labelClass: "text-sm font-medium text-gray-300",
@@ -62,30 +53,17 @@ export default function ModalFullNameDescription({
   const handleSubmit = async (e: React.FormEvent, formValues: any) => {
     e.preventDefault();
 
-    // Validation
+    // validate
     if (!formValues.name) {
-      setErrors({ name: "Name is required" });
+      setErrors({ name: "Name is required" }); // ✅ matches field name
       return;
     }
-    console.log(categoryId);
-    try {
-      if (categoryId) {
-        // Update mode
-        const data = {
-          name: formValues.name,
-          description: formValues.description,
-        };
-        console.log("Updating with:", data);
-        await updateCategorey({ id: categoryId, data }).unwrap();
-      } else {
-        // Create mode
-        await createCategory(formValues).unwrap();
-      }
 
-      onSave?.(formValues);
+    try {
+      await createCategory(formValues).unwrap(); // ✅ unwrap for proper error handling
       onClose();
     } catch (error) {
-      console.error("Failed to save category:", error);
+      console.error("Failed to create category:", error);
     }
   };
 
@@ -100,7 +78,7 @@ export default function ModalFullNameDescription({
           aria-modal="true"
           role="dialog"
         >
-          {/* Backdrop */}
+          {/* Backdrop with blur */}
           <div
             onClick={onClose}
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
@@ -116,9 +94,7 @@ export default function ModalFullNameDescription({
           >
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h3 className="text-xl font-semibold text-white">
-                  {categoryId ? "Update Category" : "Create Category"}
-                </h3>
+                <h3 className="text-xl font-semibold text-white">Category</h3>
                 <p className="mt-1 text-sm text-gray-400">
                   full name and description
                 </p>
@@ -152,11 +128,10 @@ export default function ModalFullNameDescription({
                 formFields={formFields}
                 handleSubmit={handleSubmit}
                 mode="edit"
-                submitTitle={categoryId ? "Update" : "Create"}
+                submitTitle="Save"
                 submitBtnClass="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500"
                 submitClass="flex justify-end gap-3"
               />
-
               <button
                 type="button"
                 onClick={onClose}

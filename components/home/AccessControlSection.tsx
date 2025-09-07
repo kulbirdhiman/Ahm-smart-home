@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import BUTTON from "./ButtonComponent"; // Keep your button component
+import { motion, AnimatePresence } from "framer-motion";
 
 const products = [
   {
@@ -42,40 +42,79 @@ const AccessControlShowcase = () => {
     <section className="w-full bg-gradient-to-b from-[#0f0f0f] to-[#1a1a1a] px-6 py-16">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
         {/* -------- LEFT (Product Info + Buttons) -------- */}
-        <div className="flex-1 text-center md:text-left space-y-6">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white">
+        <motion.div
+          key={selected.id}
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -50 }}
+          transition={{ duration: 0.5 }}
+          className="flex-1 text-center md:text-left space-y-6"
+        >
+          <motion.h2
+            key={selected.id}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl md:text-4xl lg:text-5xl font-semibold text-white"
+          >
             {selected.name}
-          </h2>
-          <p className="text-gray-300 text-lg max-w-lg mx-auto md:mx-0">
+          </motion.h2>
+
+          <motion.p
+            key={selected.id}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="text-gray-300 text-lg max-w-lg mx-auto md:mx-0"
+          >
             {selected.desc}
-          </p>
-          <p className="text-sky-400 text-2xl font-bold">{selected.price}</p>
+          </motion.p>
 
-          {/* Buttons */}
+          <motion.p
+            key={selected.id}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="text-sky-400 text-2xl font-bold"
+          >
+            {selected.price}
+          </motion.p>
+
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center md:justify-start">
-            <BUTTON text="View More" Click={() => alert("View more")} />
-            <BUTTON text="Shop Now" Click={() => alert("Shop now")} />
+            <button className="px-4 py-2 text-white rounded-2xl border-2 font-bold border-white-900 cursor-pointer hover:bg-blue-400" > View more </button>
+               <button className="px-4 py-2 text-white rounded-2xl border-2 font-bold border-white-900 cursor-pointer hover:bg-blue-400" > Shop Now </button>
           </div>
-        </div>
+        </motion.div>
 
-        {/* -------- RIGHT (Main Product Image + Hover Thumbnails) -------- */}
+        {/* -------- RIGHT (Main Product Image + Thumbnails) -------- */}
         <div className="flex-1 flex flex-col items-center">
           {/* Main Image */}
           <div className="relative p-6">
             <div className="absolute inset-0 blur-3xl bg-sky-500/20 rounded-full"></div>
-            <Image
-              src={selected.image}
-              alt={selected.name}
-              width={400}
-              height={400}
-              className="relative object-contain drop-shadow-2xl transition-transform duration-500 hover:scale-105"
-            />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selected.id}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.5 }}
+                className="relative"
+              >
+                <Image
+                  src={selected.image}
+                  alt={selected.name}
+                  width={400}
+                  height={400}
+                  className="object-contain drop-shadow-2xl"
+                />
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           {/* Thumbnails */}
           <div className="flex gap-6 mt-8">
             {products.map((product) => (
-              <div
+              <motion.div
                 key={product.id}
                 className={`w-[80px] h-[100px] flex items-center justify-center rounded-xl cursor-pointer transition-all duration-300 ${
                   selected.id === product.id
@@ -83,6 +122,7 @@ const AccessControlShowcase = () => {
                     : "hover:ring-2 hover:ring-sky-300 hover:scale-105"
                 }`}
                 onMouseEnter={() => setSelected(product)}
+                whileHover={{ scale: 1.1 }}
               >
                 <Image
                   src={product.image}
@@ -91,7 +131,7 @@ const AccessControlShowcase = () => {
                   height={100}
                   className="object-contain"
                 />
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

@@ -1,7 +1,10 @@
 "use client";
 // Login.tsx
 import React, { useState, ChangeEvent, FormEvent } from "react";
-
+import { useLoginMutation } from "@/store/api/userAPi";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 interface FormData {
   email: string;
   password: string;
@@ -16,10 +19,23 @@ export default function Login() {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  const router = useRouter();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const [login] = useLoginMutation();
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Login data:", formData);
+    try {
+      const response = await login(formData).unwrap();
+      toast.success("Login successful!");
+      console.log("Login response:", response);
+
+      // Redirect after login
+      router.push("/admin");
+    } catch (error: any) {
+      const msg = error?.data?.message || "Login failed!";
+      toast.error(msg);
+      console.error("Login error:", error);
+    }
   };
 
   return (
@@ -66,9 +82,9 @@ export default function Login() {
 
           {/* Forgot password */}
           <div className="flex justify-end">
-            <a href="#" className="text-sm text-blue-400 hover:underline">
+            <Link href="#" className="text-sm text-blue-400 hover:underline">
               Forgot Password?
-            </a>
+            </Link>
           </div>
 
           {/* Submit Button */}
@@ -83,9 +99,9 @@ export default function Login() {
         {/* Signup */}
         <p className="text-center text-sm text-gray-400 mt-6">
           Don’t have an account?{" "}
-          <a href="#" className="text-blue-400 hover:underline">
+          <Link href="/sign-up" className="text-blue-400 hover:underline">
             Sign Up
-          </a>
+          </Link>
         </p>
       </div>
     </div>
