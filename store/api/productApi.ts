@@ -21,8 +21,33 @@ export const productApi = apiSlice.injectEndpoints({
         params: { page, limit, search },
       }),
     }),
+    getProductById: builder.query({
+      query: (id) => ({
+        url: `${PRODUCT_URL}/${id}`,
+        method: "GET",
+      }),
+    }),
+    updateProduct: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `${PRODUCT_URL}/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+    }),
+    deleteProduct: builder.mutation({
+      query: (id) => ({
+        url: `${PRODUCT_URL}/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
 // Auto-generated hooks
-export const { useCreateProductMutation, useGetProductsQuery } = productApi;
+export const {
+  useCreateProductMutation,
+  useGetProductsQuery,
+  useDeleteProductMutation,
+  useUpdateProductMutation,
+  useGetProductByIdQuery,
+} = productApi;
