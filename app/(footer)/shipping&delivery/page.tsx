@@ -248,8 +248,8 @@ export default function ShippingAndDeliveryPage() {
                                 />
                             </div>
                             <div>
-                                <label className="text-xs uppercase tracking-wide text-sky-200/80">Cart Weight</label>
-                                <select className="mt-1 w-full rounded-xl bg-black/50 border border-sky-400/30 px-4 py-2.5 text-sky-100 outline-none focus:ring-2 focus:ring-sky-400/50">
+                                <label htmlFor="cartWeight" className="text-xs uppercase tracking-wide text-sky-200/80">Cart Weight</label>
+                                <select id="cartWeight" className="mt-1 w-full rounded-xl bg-black/50 border border-sky-400/30 px-4 py-2.5 text-sky-100 outline-none focus:ring-2 focus:ring-sky-400/50">
                                     <option>Up to 0.5 kg</option>
                                     <option>0.5 – 1 kg</option>
                                     <option>1 – 2 kg</option>

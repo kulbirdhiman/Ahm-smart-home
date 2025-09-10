@@ -43,7 +43,7 @@ const AccessControlShowcase = () => {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
         {/* -------- LEFT (Product Info + Buttons) -------- */}
         <motion.div
-          key={selected.id}
+          key={`info-${selected.id}`}
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -50 }}
@@ -51,7 +51,7 @@ const AccessControlShowcase = () => {
           className="flex-1 text-center md:text-left space-y-6"
         >
           <motion.h2
-            key={selected.id}
+            key={`title-${selected.id}`}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -61,7 +61,7 @@ const AccessControlShowcase = () => {
           </motion.h2>
 
           <motion.p
-            key={selected.id}
+            key={`desc-${selected.id}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
@@ -71,7 +71,7 @@ const AccessControlShowcase = () => {
           </motion.p>
 
           <motion.p
-            key={selected.id}
+            key={`price-${selected.id}`}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
@@ -81,8 +81,8 @@ const AccessControlShowcase = () => {
           </motion.p>
 
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center md:justify-start">
-            <button className="px-4 py-2 text-white rounded-2xl border-2 font-bold border-white-900 cursor-pointer hover:bg-blue-400" > View more </button>
-               <button className="px-4 py-2 text-white rounded-2xl border-2 font-bold border-white-900 cursor-pointer hover:bg-blue-400" > Shop Now </button>
+            <button className="px-4 py-2 text-white rounded-2xl border-2 font-bold border-white cursor-pointer hover:bg-blue-400" > View more </button>
+              <button className="px-4 py-2 text-white rounded-2xl border-2 font-bold border-white cursor-pointer hover:bg-blue-400" > Shop Now </button>
           </div>
         </motion.div>
 
