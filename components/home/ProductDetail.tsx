@@ -5,14 +5,33 @@ import ProductTabs from "./ProductTab";
 import RelatedProducts from "./ProductH";
 import { Heart } from "lucide-react";
 import Image from "next/image";
+import { addToCart } from "@/store/actions/cartSlice";
+import { useDispatch } from "react-redux";
 
 export default function Home() {
   const [quantity, setQuantity] = useState(1);
   const [favorite, setFavorite] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState("standard");
+  const dispatch = useDispatch();
 
   const increase = () => setQuantity((prev) => prev + 1);
   const decrease = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+
+  const addToCartHandleSubmit = () => {
+    try {
+      dispatch(
+        addToCart({
+          id: 26876, // product ID (can be dynamic)
+          name: "3D Face Recognition Smart Door Lock",
+          price: 144,
+          quantity,
+          // variant: selectedVariant,
+        })
+      );
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-black text-white px-6 md:px-16 py-14 font-[Inter]">
@@ -43,7 +62,7 @@ export default function Home() {
             className="transition-transform duration-500 group-hover:scale-105"
           />
 
-          {/* Hover Overlay with Info */}
+          {/* Hover Overlay */}
           <div className="absolute inset-0 bg-black/70 backdrop-blur-md opacity-0 group-hover:opacity-100 flex flex-col justify-center items-center gap-3 px-6 text-center transition-opacity duration-500">
             <p className="text-lg font-medium">
               Advanced 3D Face Recognition Lock
@@ -87,7 +106,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Quantity + Buy Now */}
+          {/* Quantity + Buttons */}
           <div className="flex items-center gap-3 pt-4">
             <button
               onClick={decrease}
@@ -102,8 +121,11 @@ export default function Home() {
             >
               +
             </button>
-            <button className="ml-4 px-8 py-3 bg-blue-600 rounded-full text-white flex items-center gap-2 hover:bg-blue-700 transition font-medium">
-              🛒 Buy Now
+            <button
+              onClick={addToCartHandleSubmit}
+              className="ml-4 px-8 py-3 bg-blue-600 rounded-full text-white flex items-center gap-2 hover:bg-blue-700 transition font-medium"
+            >
+              🛒 Add to Cart
             </button>
           </div>
 
