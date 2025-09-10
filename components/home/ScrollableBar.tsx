@@ -70,7 +70,7 @@ function ProductCard({
         {/* Front Side */}
         <div className="absolute inset-0 backface-hidden bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center shadow-lg">
           {/* Heart */}
-          <button className="absolute top-4 right-4 bg-black/40 p-2 rounded-full text-white hover:bg-black/70 transition">
+          <button aria-label="heart-icon" className="absolute top-4 right-4 bg-black/40 p-2 rounded-full text-white hover:bg-black/70 transition">
             <Heart className="w-4 h-4" />
           </button>
 

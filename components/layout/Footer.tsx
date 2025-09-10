@@ -3,7 +3,7 @@ import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";
 
 export default function FooterDark() {
     return (
-        <footer className="w-full bg-[#1A1614] text-gray-300">
+        <footer className="w-full bg-[#000000a3] text-gray-300">
         <div className="mx-auto max-w-7xl grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 px-6 py-12 text-center md:text-left">
             
             {/* Logo + Socials */}

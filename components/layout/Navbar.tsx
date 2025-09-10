@@ -39,13 +39,13 @@ const Navbar = () => {
 
         {/* Right Icons */}
         <div className="flex items-center space-x-6 text-gray-200">
-          <button className="hover:text-white transition">
+          <button aria-label="icons" className="hover:text-white transition">
             <Heart className="w-5 h-5" />
           </button>
-          <button className="hover:text-white transition">
+          <button aria-label="icons" className="hover:text-white transition">
             <ShoppingBag className="w-5 h-5" />
           </button>
-          <button className="hover:text-white transition">
+          <button aria-label="icons" className="hover:text-white transition">
             <User className="w-5 h-5" />
           </button>
 

@@ -36,6 +36,7 @@ const Showing = () => {
           <div className="mb-6">
             <h3 className="text-white font-medium text-sm mb-3">Price</h3>
             <input
+              aria-label="select-price"
               type="range"
               min="50"
               max="500"
