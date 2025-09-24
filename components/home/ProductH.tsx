@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 const related = [
   {
     id: 1,
@@ -33,7 +35,10 @@ export default function RelatedProducts() {
             key={item.id}
             className="flex items-center gap-4 border border-gray-700 rounded-xl p-3 bg-gray-900"
           >
-            <img
+            <Image
+            height={200
+            }
+            width={ 200}
               src={item.image}
               alt={item.title}
               className="w-20 h-20 object-contain"

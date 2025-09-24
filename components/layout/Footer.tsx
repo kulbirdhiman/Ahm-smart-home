@@ -1,5 +1,6 @@
 import React from "react";
 import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import Image from "next/image";
 
 export default function FooterDark() {
     return (
@@ -9,7 +10,9 @@ export default function FooterDark() {
             {/* Logo + Socials */}
             <div>
             <div className="flex flex-col md:flex-row items-center md:items-start gap-2">
-                <img
+                <Image
+                height={200}
+                width={300}
                 src="/Ahm_logo.png"
                 alt="AHM Logo"
                 className="h-10 w-auto"

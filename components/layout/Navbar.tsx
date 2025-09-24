@@ -13,7 +13,7 @@ const Navbar = () => {
   const categories = data?.data
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-black/90 backdrop-blur-md">
+    <nav className="top-0 left-0 w-full z-50 bg-black/90 backdrop-blur-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
         <Link href="/" className="text-white font-bold text-xl">
