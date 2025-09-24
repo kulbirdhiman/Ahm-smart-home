@@ -3,7 +3,7 @@
 import React from "react";
 // import { FiHeart } from "react-icons/fi";
 
-import Image from "next/image"; // ✅ Only if you plan to use Next.js Image component
+
 import { Heart } from "lucide-react";
 
 type ProductProps = {
