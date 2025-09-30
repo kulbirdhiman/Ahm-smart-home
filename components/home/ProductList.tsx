@@ -4,8 +4,9 @@ import React from "react";
 import Product from "./Product";
 import Image from "next/image";
 import { Search, SlidersHorizontal } from "lucide-react";
-
+import { useRouter } from "next/navigation";
 const Showing = () => {
+  const router = useRouter()
   return (
     <section className="w-full py-12">
       <div className="flex flex-col lg:flex-row gap-10 px-6 sm:px-12 lg:px-20">
@@ -111,7 +112,7 @@ const Showing = () => {
                   </p>
                   <p className="text-lg font-semibold text-white mt-2">$150</p>
 
-                  <button className="mt-4 w-full py-2 rounded-full bg-white text-black text-sm font-medium hover:bg-gray-200 transition">
+                  <button onClick={()=> router.push("/product/detail/12")} className="mt-4 w-full py-2 rounded-full bg-white text-black text-sm font-medium hover:bg-gray-200 transition">
                     Buy Now
                   </button>
                 </div>
