@@ -14,7 +14,7 @@
     "@dnd-kit/utilities": "^3.2.2",
     "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^5.0.1",
-    "@paypal/react-paypal-js": "^8.8.2",
+    "@paypal/react-paypal-js": "^8.9.2",
     "@reduxjs/toolkit": "^2.6.1",
     "@square/web-sdk": "^2.1.0",
     "@tiptap/extension-bullet-list": "^2.11.7",

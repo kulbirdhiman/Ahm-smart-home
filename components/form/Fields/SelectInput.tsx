@@ -44,6 +44,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
           setFieldValue(field.name, newValue);
         }}
         isSearchable
+        required
         placeholder={field.placeholder}
         className="block w-full"
       />

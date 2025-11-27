@@ -10,7 +10,7 @@ const Page = () => {
 
   return (
     <div className="">
-      <AddProduct values={values} setValues={setValues} />
+      <AddProduct  />
     </div>
   );
 };
