@@ -8,13 +8,14 @@ import { useGetCategoriesQuery } from "@/store/api/categorey";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // ✅ Fetch categories
+  // Fetch categories
   const { data, isLoading } = useGetCategoriesQuery({});
-  const categories = data?.data
+  const categories = data?.data;
 
   return (
     <nav className="top-0 left-0 w-full z-50 bg-black/90 backdrop-blur-md">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+        
         {/* Logo */}
         <Link href="/" className="text-white font-bold text-xl">
           AHM
@@ -39,15 +40,19 @@ const Navbar = () => {
 
         {/* Right Icons */}
         <div className="flex items-center space-x-6 text-gray-200">
+
           <button aria-label="icons" className="hover:text-white transition">
             <Heart className="w-5 h-5" />
           </button>
+
           <button aria-label="icons" className="hover:text-white transition">
             <ShoppingBag className="w-5 h-5" />
           </button>
-          <button aria-label="icons" className="hover:text-white transition">
+
+          {/* ✅ USER ICON → LOGIN PAGE */}
+          <Link href="/login" className="hover:text-white transition">
             <User className="w-5 h-5" />
-          </button>
+          </Link>
 
           {/* Mobile Hamburger */}
           <button

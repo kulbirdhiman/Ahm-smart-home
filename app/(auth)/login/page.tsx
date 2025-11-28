@@ -30,7 +30,7 @@ export default function Login() {
       console.log("Login response:", response);
 
       // Redirect after login
-      router.push("/admin");
+      router.push("/admin/product");
     } catch (error: any) {
       const msg = error?.data?.message || "Login failed!";
       toast.error(msg);
